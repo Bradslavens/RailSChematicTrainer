@@ -1,6 +1,7 @@
 import express, { type Express, type NextFunction, type Request, type Response } from "express";
 import cors from "cors";
 import { authRouter } from "./routes/auth.js";
+import { schematicsRouter, pointsRouter } from "./routes/schematics.js";
 
 /** Build the Express app. Kept separate from server start-up so tests can import it. */
 export function createApp(): Express {
@@ -13,6 +14,8 @@ export function createApp(): Express {
   });
 
   app.use("/api/auth", authRouter);
+  app.use("/api/schematics", schematicsRouter);
+  app.use("/api/points", pointsRouter);
 
   // Centralized error handler — keeps unexpected errors from leaking internals.
   app.use((err: unknown, _req: Request, res: Response, _next: NextFunction) => {

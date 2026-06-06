@@ -1,0 +1,52 @@
+{
+  "name": "La Mesa Branch (Milepost 11-13)",
+  "viewBox": [0, 0, 700, 950],
+  "lineColor": "#1f6feb",
+  "tracks": [
+    { "id": "left", "color": "#1f6feb", "polyline": [[365, 40], [365, 910]] },
+    { "id": "right", "color": "#1f6feb", "polyline": [[510, 40], [510, 910]] }
+  ],
+  "points": [
+    { "type": "signal", "label": "E18LA", "x": 345, "y": 95, "track": "left" },
+    { "type": "signal", "label": "E18LB", "x": 490, "y": 95, "track": "right" },
+    { "type": "signal", "label": "E17A", "x": 378, "y": 130, "track": "left" },
+    { "type": "signal", "label": "E17B", "x": 470, "y": 130, "track": "right" },
+    { "type": "signal", "label": "E18RB", "x": 380, "y": 175, "track": "left" },
+    { "type": "signal", "label": "E18RA", "x": 513, "y": 175, "track": "right" },
+    { "type": "signal", "label": "E1236", "x": 520, "y": 213, "track": "right" },
+    { "type": "signal", "label": "E1221", "x": 340, "y": 310, "track": "left" },
+    { "type": "signal", "label": "E1194", "x": 522, "y": 343, "track": "right" },
+    { "type": "signal", "label": "E1147", "x": 340, "y": 468, "track": "left" },
+    { "type": "signal", "label": "E1136", "x": 522, "y": 490, "track": "right" },
+    { "type": "signal", "label": "E12LA", "x": 345, "y": 578, "track": "left" },
+    { "type": "signal", "label": "E12LB", "x": 492, "y": 578, "track": "right" },
+    { "type": "signal", "label": "E13B", "x": 378, "y": 615, "track": "left" },
+    { "type": "signal", "label": "E13A", "x": 470, "y": 615, "track": "right" },
+    { "type": "signal", "label": "E7B", "x": 575, "y": 623, "track": "right" },
+    { "type": "signal", "label": "E11A", "x": 362, "y": 690, "track": "left" },
+    { "type": "signal", "label": "E11B", "x": 470, "y": 690, "track": "right" },
+    { "type": "signal", "label": "E12RB", "x": 380, "y": 738, "track": "left" },
+    { "type": "signal", "label": "E12RA", "x": 522, "y": 738, "track": "right" },
+
+    { "type": "station", "label": "La Mesa Blvd", "x": 430, "y": 255 },
+    { "type": "station", "label": "Spring Street", "x": 430, "y": 418 },
+    { "type": "station", "label": "Lemon Grove", "x": 430, "y": 815 },
+
+    { "type": "crossing", "label": "I-8 Offramp", "x": 200, "y": 145 },
+    { "type": "crossing", "label": "University Ave", "x": 205, "y": 175 },
+    { "type": "crossing", "label": "Allison Ave", "x": 200, "y": 203 },
+    { "type": "crossing", "label": "La Mesa Blvd", "x": 190, "y": 272 },
+    { "type": "crossing", "label": "Lemon Ave", "x": 190, "y": 302 },
+    { "type": "crossing", "label": "High St.", "x": 175, "y": 635 },
+    { "type": "crossing", "label": "SR-94 Overpass", "x": 190, "y": 675 },
+    { "type": "crossing", "label": "North Ave", "x": 175, "y": 760 },
+    { "type": "crossing", "label": "Broadway", "x": 165, "y": 830 },
+
+    { "type": "milepost", "label": "13", "x": 590, "y": 148 },
+    { "type": "milepost", "label": "12", "x": 595, "y": 308 },
+    { "type": "milepost", "label": "11", "x": 590, "y": 578 },
+
+    { "type": "ss", "label": "SS", "x": 297, "y": 362 },
+    { "type": "ss", "label": "SS", "x": 590, "y": 623 }
+  ]
+}

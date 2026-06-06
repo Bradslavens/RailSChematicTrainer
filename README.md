@@ -28,10 +28,17 @@ clickable hotspots from the same coordinates, so they always line up. See
 ## Getting started
 
 ```bash
-npm install          # install all workspaces
-npm test             # run the test suites
-npm run dev          # run server + web in dev
+npm install                                  # install all workspaces
+cp server/.env.example server/.env           # local config (DB + JWT secret)
+npm --workspace server run prisma:migrate    # create the SQLite database
+npm --workspace server run seed              # create the admin + load seed schematics
+npm test                                     # run the test suites
+npm run dev                                  # run server + web in dev
 ```
+
+The seed creates an admin account (default `admin@rail.test` / `admin12345`, override with
+`ADMIN_EMAIL` / `ADMIN_PASSWORD`) and loads any schematic JSON files in `server/seed/`.
+Admins can also upload new schematic JSON files from the in-app admin screen.
 
 ## Games
 
@@ -47,9 +54,8 @@ With XP, levels, daily streaks, per-category mastery, and a leaderboard.
 Built in phases (TDD; each phase ends green-tested):
 
 - [x] **Phase 0** — scaffold, test harness, database schema
-- [ ] Phase 1 — auth + accounts
-- [ ] Phase 2 — schematic upload + admin CRUD
-- [ ] Phase 3 — import & validate schematic JSON
+- [x] **Phase 1** — auth + accounts
+- [x] **Phase 2** — schematic JSON validation, seed, upload, and admin CRUD
 - [ ] Phase 4 — vector schematic generator + renderer
 - [ ] Phase 5 — Game 1 (Pin Drop) + scoring
 - [ ] Phase 6 — Games 2–4 + SRS + XP/streaks/leaderboard
