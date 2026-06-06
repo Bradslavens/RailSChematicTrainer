@@ -11,6 +11,8 @@ import { NameItPage } from "./pages/NameItPage.js";
 import { FlashcardPage } from "./pages/FlashcardPage.js";
 import { RunTheLinePage } from "./pages/RunTheLinePage.js";
 import { LeaderboardPage } from "./pages/LeaderboardPage.js";
+import { ProfilePage } from "./pages/ProfilePage.js";
+import { DailyChallengePage } from "./pages/DailyChallengePage.js";
 import { AdminSchematicsPage } from "./pages/admin/AdminSchematicsPage.js";
 import { AdminSchematicDetailPage } from "./pages/admin/AdminSchematicDetailPage.js";
 
@@ -62,10 +64,26 @@ export default function App() {
           }
         />
         <Route
+          path="/play/daily"
+          element={
+            <ProtectedRoute>
+              <DailyChallengePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="/leaderboard"
           element={
             <ProtectedRoute>
               <LeaderboardPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/me"
+          element={
+            <ProtectedRoute>
+              <ProfilePage />
             </ProtectedRoute>
           }
         />

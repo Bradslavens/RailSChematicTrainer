@@ -11,13 +11,27 @@ export interface NameItGameProps {
   pool: SchematicPoint[];
   roundLength?: number;
   visibleTypes?: PointType[];
+  /** Fixed ordered question set (e.g. the daily challenge). Overrides random selection. */
+  fixedQuestions?: SchematicPoint[];
+  exitLabel?: string;
   onExit: () => void;
 }
 
 const CHOICES = 4;
 
-export function NameItGame({ schematic, pool, roundLength = 10, visibleTypes, onExit }: NameItGameProps) {
-  const questions = useMemo(() => buildQuestions(pool, roundLength), [pool, roundLength]);
+export function NameItGame({
+  schematic,
+  pool,
+  roundLength = 10,
+  visibleTypes,
+  fixedQuestions,
+  exitLabel = "Play again",
+  onExit,
+}: NameItGameProps) {
+  const questions = useMemo(
+    () => fixedQuestions ?? buildQuestions(pool, roundLength),
+    [fixedQuestions, pool, roundLength],
+  );
   const [idx, setIdx] = useState(0);
   const [phase, setPhase] = useState<"asking" | "feedback" | "done">("asking");
   const [score, setScore] = useState(0);
@@ -72,7 +86,7 @@ export function NameItGame({ schematic, pool, roundLength = 10, visibleTypes, on
         <h2>Round complete!</h2>
         <p style={{ fontSize: "2rem", fontWeight: 800, margin: "0.5rem 0" }}>{score} pts</p>
         <p className="muted">{correctCount} / {questions.length} correct ({accuracy}% accuracy)</p>
-        <Button onClick={onExit} style={{ marginTop: "1rem" }}>Play again</Button>
+        <Button onClick={onExit} style={{ marginTop: "1rem" }}>{exitLabel}</Button>
       </Card>
     );
   }

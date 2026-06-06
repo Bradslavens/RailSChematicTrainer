@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext.js";
 import { Card } from "../components/ui.js";
 import { StatsBar } from "../components/StatsBar.js";
+import { isDailyDone } from "../games/daily.js";
 
 const GAMES = [
   { key: "pin-drop", icon: "📍", name: "Pin Drop", blurb: "Tap the right spot on the blank schematic.", to: "/play/pin-drop" },
@@ -21,6 +22,20 @@ export function HomePage() {
       <p className="muted">Pick a game to start learning.</p>
 
       <StatsBar />
+
+      <Card>
+        <div className="row" style={{ justifyContent: "space-between", flexWrap: "wrap" }}>
+          <div>
+            <h2 style={{ marginBottom: 0 }}>⭐ Daily Challenge</h2>
+            <p className="muted" style={{ margin: "0.25rem 0 0" }}>
+              {isDailyDone() ? "Completed today — nice work!" : "Five quick questions. One shot per day."}
+            </p>
+          </div>
+          <Link className={`btn ${isDailyDone() ? "btn--secondary" : "btn--primary"}`} to="/play/daily">
+            {isDailyDone() ? "Review →" : "Play today's →"}
+          </Link>
+        </div>
+      </Card>
 
       <Card>
         <h2>Study the schematic</h2>

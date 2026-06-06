@@ -267,6 +267,13 @@ a:hover { text-decoration: underline; }
   100% { transform: scale(1.6); opacity: 0; }
 }
 
+.topbar-nav { display: flex; align-items: center; gap: 0.75rem; }
+.topbar-nav a { color: #fff; font-weight: 600; }
+
+.stat-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 0.75rem; }
+.stat-tile { text-align: center; padding: 0.5rem; }
+.stat-tile .stat-num { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.02em; }
+
 .statsbar { padding: 0.85rem 1rem; }
 .xpbar {
   height: 10px; border-radius: 999px; background: var(--surface-2);

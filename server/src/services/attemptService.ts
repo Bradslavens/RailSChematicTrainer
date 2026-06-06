@@ -26,13 +26,29 @@ export async function recordAttempt(userId: string, input: AttemptInput): Promis
   });
 }
 
+export interface Summary {
+  total: number;
+  correct: number;
+  accuracy: number;
+}
+
+export const GAME_MODES: GameMode[] = ["pin-drop", "name-it", "flashcard", "run-the-line"];
+
 /** Per-user accuracy summary, optionally for one game mode. */
-export async function attemptSummary(
-  userId: string,
-  gameMode?: GameMode,
-): Promise<{ total: number; correct: number; accuracy: number }> {
+export async function attemptSummary(userId: string, gameMode?: GameMode): Promise<Summary> {
   const where = { userId, ...(gameMode ? { gameMode } : {}) };
   const total = await prisma.attempt.count({ where });
   const correct = await prisma.attempt.count({ where: { ...where, correct: true } });
   return { total, correct, accuracy: total === 0 ? 0 : correct / total };
+}
+
+/** Overall + per-game-mode accuracy for a user. */
+export async function attemptOverview(
+  userId: string,
+): Promise<{ overall: Summary; byMode: ({ mode: GameMode } & Summary)[] }> {
+  const overall = await attemptSummary(userId);
+  const byMode = await Promise.all(
+    GAME_MODES.map(async (mode) => ({ mode, ...(await attemptSummary(userId, mode)) })),
+  );
+  return { overall, byMode };
 }

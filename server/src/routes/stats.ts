@@ -2,6 +2,7 @@ import { Router } from "express";
 import { z } from "zod";
 import { requireAuth, type AuthedRequest } from "../middleware/auth.js";
 import { getMyStats, getLeaderboard, getMastery, getDuePoints } from "../services/statsService.js";
+import { attemptOverview } from "../services/attemptService.js";
 
 const typesSchema = z
   .string()
@@ -13,6 +14,14 @@ export const statsRouter = Router();
 statsRouter.get("/me", requireAuth, async (req: AuthedRequest, res, next) => {
   try {
     res.json({ stats: await getMyStats(req.user!.userId) });
+  } catch (err) {
+    next(err);
+  }
+});
+
+statsRouter.get("/overview", requireAuth, async (req: AuthedRequest, res, next) => {
+  try {
+    res.json({ overview: await attemptOverview(req.user!.userId) });
   } catch (err) {
     next(err);
   }

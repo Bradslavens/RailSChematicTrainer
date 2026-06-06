@@ -23,8 +23,20 @@ export interface MasteryRow {
   avgMastery: number;
 }
 
+export interface Summary {
+  total: number;
+  correct: number;
+  accuracy: number;
+}
+export type GameMode = "pin-drop" | "name-it" | "flashcard" | "run-the-line";
+export interface Overview {
+  overall: Summary;
+  byMode: ({ mode: GameMode } & Summary)[];
+}
+
 export const statsApi = {
   me: () => api.get<{ stats: MyStats }>("/stats/me").then((r) => r.stats),
+  overview: () => api.get<{ overview: Overview }>("/stats/overview").then((r) => r.overview),
   leaderboard: () => api.get<{ leaderboard: LeaderRow[] }>("/stats/leaderboard").then((r) => r.leaderboard),
   mastery: (schematicId: string) =>
     api.get<{ mastery: MasteryRow[] }>(`/stats/mastery?schematicId=${schematicId}`).then((r) => r.mastery),
