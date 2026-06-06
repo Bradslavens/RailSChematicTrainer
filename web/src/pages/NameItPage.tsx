@@ -1,19 +1,19 @@
 import { useState } from "react";
 import type { Schematic, PointType } from "../lib/schematics.js";
 import { GameSetup } from "../games/GameSetup.js";
-import { PinDropGame } from "../games/PinDropGame.js";
+import { NameItGame } from "../games/NameItGame.js";
 
 const ROUND_LENGTH = 10;
 
-export function PinDropPage() {
+export function NameItPage() {
   const [game, setGame] = useState<{ schematic: Schematic; types: PointType[] } | null>(null);
 
   if (game) {
     const pool = game.schematic.points.filter((p) => game.types.includes(p.type));
     return (
       <div className="container container--wide">
-        <h1>Pin Drop</h1>
-        <PinDropGame
+        <h1>Name It</h1>
+        <NameItGame
           schematic={game.schematic}
           pool={pool}
           roundLength={ROUND_LENGTH}
@@ -26,8 +26,8 @@ export function PinDropPage() {
 
   return (
     <GameSetup
-      title="Pin Drop"
-      blurb="You'll be given a name — tap its spot on the blank schematic."
+      title="Name It"
+      blurb="A marker glows on the diagram — pick its correct name."
       onStart={(schematic, types) => setGame({ schematic, types })}
     />
   );
