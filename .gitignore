@@ -26,6 +26,8 @@ npm-debug.log*
 
 # test / coverage
 coverage/
+*.tsbuildinfo
+.playwright-mcp/
 
 # uploaded schematic assets (kept out of git)
 server/uploads/

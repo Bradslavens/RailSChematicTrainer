@@ -1,8 +1,27 @@
+import { Routes, Route, Navigate } from "react-router-dom";
+import { TopBar } from "./components/TopBar.js";
+import { ProtectedRoute } from "./components/ProtectedRoute.js";
+import { LoginPage } from "./pages/LoginPage.js";
+import { RegisterPage } from "./pages/RegisterPage.js";
+import { HomePage } from "./pages/HomePage.js";
+
 export default function App() {
   return (
-    <main style={{ fontFamily: "system-ui, sans-serif", padding: "2rem" }}>
-      <h1>Rail Schematic Trainer</h1>
-      <p>Learn the light-rail schematic. Games coming soon.</p>
-    </main>
+    <div className="app-shell">
+      <TopBar />
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <HomePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </div>
   );
 }
