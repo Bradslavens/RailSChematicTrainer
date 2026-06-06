@@ -8,6 +8,7 @@ import { SchematicsListPage } from "./pages/SchematicsListPage.js";
 import { SchematicViewerPage } from "./pages/SchematicViewerPage.js";
 import { PinDropPage } from "./pages/PinDropPage.js";
 import { NameItPage } from "./pages/NameItPage.js";
+import { FlashcardPage } from "./pages/FlashcardPage.js";
 import { AdminSchematicsPage } from "./pages/admin/AdminSchematicsPage.js";
 import { AdminSchematicDetailPage } from "./pages/admin/AdminSchematicDetailPage.js";
 
@@ -39,6 +40,14 @@ export default function App() {
           element={
             <ProtectedRoute>
               <NameItPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/play/flashcards"
+          element={
+            <ProtectedRoute>
+              <FlashcardPage />
             </ProtectedRoute>
           }
         />

@@ -5,7 +5,7 @@ import { Card } from "../components/ui.js";
 const GAMES = [
   { key: "pin-drop", icon: "📍", name: "Pin Drop", blurb: "Tap the right spot on the blank schematic.", to: "/play/pin-drop" },
   { key: "name-it", icon: "🔎", name: "Name It", blurb: "A marker glows — recall its name.", to: "/play/name-it" },
-  { key: "flashcards", icon: "🗂️", name: "Flashcard Drill", blurb: "Spaced repetition, a little every day." },
+  { key: "flashcards", icon: "🗂️", name: "Flashcard Drill", blurb: "Spaced repetition, a little every day.", to: "/play/flashcards" },
   { key: "run-the-line", icon: "🚆", name: "Run the Line", blurb: "Name everything in order, against the clock." },
 ];
 
