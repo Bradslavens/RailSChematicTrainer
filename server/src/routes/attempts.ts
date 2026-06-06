@@ -1,7 +1,8 @@
 import { Router } from "express";
 import { z } from "zod";
 import { requireAuth, type AuthedRequest } from "../middleware/auth.js";
-import { recordAttempt, attemptSummary, type GameMode } from "../services/attemptService.js";
+import { attemptSummary, type GameMode } from "../services/attemptService.js";
+import { applyAttemptOutcome } from "../services/statsService.js";
 import { NotFoundError } from "../services/schematicService.js";
 
 const gameModeSchema = z.enum(["pin-drop", "name-it", "flashcard", "run-the-line"]);
@@ -21,8 +22,12 @@ attemptsRouter.post("/", requireAuth, async (req: AuthedRequest, res, next) => {
     return res.status(400).json({ error: parsed.error.issues[0]?.message ?? "Invalid input" });
   }
   try {
-    const attempt = await recordAttempt(req.user!.userId, parsed.data);
-    res.status(201).json({ attempt: { id: attempt.id } });
+    const outcome = await applyAttemptOutcome(req.user!.userId, parsed.data);
+    res.status(201).json({
+      attempt: { id: outcome.attempt.id },
+      stats: outcome.stats,
+      leveledUp: outcome.leveledUp,
+    });
   } catch (err) {
     if (err instanceof NotFoundError) return res.status(404).json({ error: err.message });
     next(err);
