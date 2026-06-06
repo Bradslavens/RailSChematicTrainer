@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext.js";
 import { Card } from "../components/ui.js";
+import { StatsBar } from "../components/StatsBar.js";
 
 const GAMES = [
   { key: "pin-drop", icon: "📍", name: "Pin Drop", blurb: "Tap the right spot on the blank schematic.", to: "/play/pin-drop" },
   { key: "name-it", icon: "🔎", name: "Name It", blurb: "A marker glows — recall its name.", to: "/play/name-it" },
   { key: "flashcards", icon: "🗂️", name: "Flashcard Drill", blurb: "Spaced repetition, a little every day.", to: "/play/flashcards" },
-  { key: "run-the-line", icon: "🚆", name: "Run the Line", blurb: "Name everything in order, against the clock." },
+  { key: "run-the-line", icon: "🚆", name: "Run the Line", blurb: "Name everything in order, against the clock.", to: "/play/run-the-line" },
 ];
 
 export function HomePage() {
@@ -17,7 +18,9 @@ export function HomePage() {
         <h1 style={{ marginBottom: 0 }}>Hi, {user?.email}</h1>
         <span className="badge">{user?.role}</span>
       </div>
-      <p className="muted">Pick a game to start learning. Progress tracking arrives soon.</p>
+      <p className="muted">Pick a game to start learning.</p>
+
+      <StatsBar />
 
       <Card>
         <h2>Study the schematic</h2>

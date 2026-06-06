@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { ApiError } from "../lib/api.js";
 import { schematicsApi, POINT_TYPES, type Schematic, type PointType } from "../lib/schematics.js";
 import { SchematicView } from "../schematic/SchematicView.js";
+import { MasteryPanel } from "../components/MasteryPanel.js";
 import { Card, Button, Alert, Spinner } from "../components/ui.js";
 
 const TYPE_LABELS: Record<PointType, string> = {
@@ -66,6 +67,8 @@ export function SchematicViewerPage() {
       <Card>
         <SchematicView schematic={schematic} showLabels={showLabels} visibleTypes={visibleTypes} />
       </Card>
+
+      <MasteryPanel schematicId={schematic.id} />
     </div>
   );
 }

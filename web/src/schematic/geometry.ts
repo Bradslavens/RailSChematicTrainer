@@ -33,3 +33,35 @@ export function diamondPoints(cx: number, cy: number, r: number): string {
 export function distance(ax: number, ay: number, bx: number, by: number): number {
   return Math.hypot(ax - bx, ay - by);
 }
+
+/** Distance along a polyline to the projection of the closest point on it. */
+export function arcLengthAt(polyline: [number, number][], p: { x: number; y: number }): number {
+  let best = Infinity;
+  let bestLen = 0;
+  let acc = 0;
+  for (let i = 0; i < polyline.length - 1; i++) {
+    const [ax, ay] = polyline[i];
+    const [bx, by] = polyline[i + 1];
+    const dx = bx - ax;
+    const dy = by - ay;
+    const segLen = Math.hypot(dx, dy);
+    const t = segLen === 0 ? 0 : Math.max(0, Math.min(1, ((p.x - ax) * dx + (p.y - ay) * dy) / (segLen * segLen)));
+    const projX = ax + t * dx;
+    const projY = ay + t * dy;
+    const d = Math.hypot(p.x - projX, p.y - projY);
+    if (d < best) {
+      best = d;
+      bestLen = acc + t * segLen;
+    }
+    acc += segLen;
+  }
+  return bestLen;
+}
+
+/** Order points by their position along a track's polyline (start -> end). */
+export function orderAlongTrack<T extends { x: number; y: number }>(
+  points: T[],
+  polyline: [number, number][],
+): T[] {
+  return [...points].sort((a, b) => arcLengthAt(polyline, a) - arcLengthAt(polyline, b));
+}

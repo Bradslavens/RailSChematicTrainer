@@ -58,5 +58,5 @@ Built in phases (TDD; each phase ends green-tested):
 - [x] **Phase 2** — schematic JSON validation, seed, upload, and admin CRUD
 - [x] **Phase 4** — vector schematic renderer (blank diagram + label/filter modes)
 - [x] **Phase 5** — Game 1 (Pin Drop) + proximity scoring + attempt tracking
-- [ ] Phase 6 — Games 2–4 + SRS + XP/streaks/leaderboard
-- [ ] Phase 7 — polish, stats, e2e
+- [x] **Phase 6** — Games 2–4 (Name It, Flashcard SRS, Run the Line) + XP/levels/streaks/mastery/leaderboard
+- [ ] Phase 7 — polish, stats dashboards, daily challenge, e2e
