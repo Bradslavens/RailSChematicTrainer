@@ -4,6 +4,8 @@ import { ProtectedRoute } from "./components/ProtectedRoute.js";
 import { LoginPage } from "./pages/LoginPage.js";
 import { RegisterPage } from "./pages/RegisterPage.js";
 import { HomePage } from "./pages/HomePage.js";
+import { SchematicsListPage } from "./pages/SchematicsListPage.js";
+import { SchematicViewerPage } from "./pages/SchematicViewerPage.js";
 import { AdminSchematicsPage } from "./pages/admin/AdminSchematicsPage.js";
 import { AdminSchematicDetailPage } from "./pages/admin/AdminSchematicDetailPage.js";
 
@@ -19,6 +21,22 @@ export default function App() {
           element={
             <ProtectedRoute>
               <HomePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/schematics"
+          element={
+            <ProtectedRoute>
+              <SchematicsListPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/schematics/:id"
+          element={
+            <ProtectedRoute>
+              <SchematicViewerPage />
             </ProtectedRoute>
           }
         />

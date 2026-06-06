@@ -19,6 +19,12 @@ export function HomePage() {
       </div>
       <p className="muted">Pick a game to start learning. Progress tracking arrives soon.</p>
 
+      <Card>
+        <h2>Study the schematic</h2>
+        <p className="muted">Explore the blank diagram and toggle labels as you learn.</p>
+        <Link className="btn btn--primary" to="/schematics">Browse schematics →</Link>
+      </Card>
+
       <div
         style={{
           display: "grid",

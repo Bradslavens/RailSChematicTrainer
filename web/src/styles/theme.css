@@ -222,6 +222,58 @@ a:hover { text-decoration: underline; }
   background: rgba(22,163,74,0.12); color: var(--accent); border: 1px solid rgba(22,163,74,0.3);
 }
 
+/* ---- schematic renderer ---- */
+.schematic {
+  width: 100%;
+  height: auto;
+  display: block;
+  touch-action: manipulation;
+  background: #ffffff;
+  border-radius: var(--radius-sm);
+}
+.schematic .track { fill: none; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+
+.marker .glyph { stroke-linejoin: round; }
+.marker--signal .glyph { fill: var(--brand); }
+.marker--station .glyph { fill: #ffffff; stroke: var(--accent); stroke-width: 2.5; }
+.marker--crossing .glyph { fill: var(--warn); }
+.marker--milepost .glyph { fill: #ffffff; stroke: #64748b; stroke-width: 2; }
+.marker--ss .glyph { fill: #ffffff; stroke: #64748b; stroke-width: 2; }
+
+.marker .hit-area { fill: transparent; }
+.marker.is-interactive { cursor: pointer; }
+.marker.is-interactive:focus { outline: none; }
+.marker.is-interactive:focus .glyph { stroke: var(--brand-ink); stroke-width: 3; }
+
+.marker-label {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 700;
+  fill: #0f172a;
+  dominant-baseline: middle;
+}
+.marker--station .marker-label { text-anchor: middle; font-family: var(--font); font-size: 11px; fill: var(--accent); }
+
+.marker .pulse {
+  fill: none;
+  stroke: var(--brand);
+  stroke-width: 3;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: marker-pulse 1.3s ease-out infinite;
+}
+@keyframes marker-pulse {
+  0% { transform: scale(0.7); opacity: 0.9; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+.schematic-toolbar { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+.chip {
+  border: 1.5px solid var(--border); background: var(--surface); color: var(--text);
+  border-radius: 999px; padding: 0.35rem 0.8rem; font-size: 0.85rem; font-weight: 600; cursor: pointer;
+}
+.chip.is-active { background: var(--brand); color: #fff; border-color: var(--brand); }
+
 .spinner {
   width: 22px; height: 22px;
   border: 3px solid var(--border);

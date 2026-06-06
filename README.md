@@ -56,7 +56,7 @@ Built in phases (TDD; each phase ends green-tested):
 - [x] **Phase 0** — scaffold, test harness, database schema
 - [x] **Phase 1** — auth + accounts
 - [x] **Phase 2** — schematic JSON validation, seed, upload, and admin CRUD
-- [ ] Phase 4 — vector schematic generator + renderer
+- [x] **Phase 4** — vector schematic renderer (blank diagram + label/filter modes)
 - [ ] Phase 5 — Game 1 (Pin Drop) + scoring
 - [ ] Phase 6 — Games 2–4 + SRS + XP/streaks/leaderboard
 - [ ] Phase 7 — polish, stats, e2e
