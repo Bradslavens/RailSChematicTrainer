@@ -3,7 +3,7 @@ import { useAuth } from "../auth/AuthContext.js";
 import { Card } from "../components/ui.js";
 
 const GAMES = [
-  { key: "pin-drop", icon: "📍", name: "Pin Drop", blurb: "Tap the right spot on the blank schematic." },
+  { key: "pin-drop", icon: "📍", name: "Pin Drop", blurb: "Tap the right spot on the blank schematic.", to: "/play/pin-drop" },
   { key: "name-it", icon: "🔎", name: "Name It", blurb: "A marker glows — recall its name." },
   { key: "flashcards", icon: "🗂️", name: "Flashcard Drill", blurb: "Spaced repetition, a little every day." },
   { key: "run-the-line", icon: "🚆", name: "Run the Line", blurb: "Name everything in order, against the clock." },
@@ -37,7 +37,13 @@ export function HomePage() {
             <div style={{ fontSize: "1.8rem" }}>{g.icon}</div>
             <h2 style={{ marginTop: "0.5rem" }}>{g.name}</h2>
             <p className="muted" style={{ marginBottom: 0 }}>{g.blurb}</p>
-            <p className="muted" style={{ marginTop: "0.75rem", fontSize: "0.8rem" }}>Coming soon</p>
+            {g.to ? (
+              <p style={{ marginTop: "0.75rem", marginBottom: 0 }}>
+                <Link className="btn btn--primary btn--sm" to={g.to}>Play →</Link>
+              </p>
+            ) : (
+              <p className="muted" style={{ marginTop: "0.75rem", fontSize: "0.8rem" }}>Coming soon</p>
+            )}
           </Card>
         ))}
       </div>

@@ -6,6 +6,7 @@ import { RegisterPage } from "./pages/RegisterPage.js";
 import { HomePage } from "./pages/HomePage.js";
 import { SchematicsListPage } from "./pages/SchematicsListPage.js";
 import { SchematicViewerPage } from "./pages/SchematicViewerPage.js";
+import { PinDropPage } from "./pages/PinDropPage.js";
 import { AdminSchematicsPage } from "./pages/admin/AdminSchematicsPage.js";
 import { AdminSchematicDetailPage } from "./pages/admin/AdminSchematicDetailPage.js";
 
@@ -21,6 +22,14 @@ export default function App() {
           element={
             <ProtectedRoute>
               <HomePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/play/pin-drop"
+          element={
+            <ProtectedRoute>
+              <PinDropPage />
             </ProtectedRoute>
           }
         />
