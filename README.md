@@ -32,9 +32,14 @@ npm install                                  # install all workspaces
 cp server/.env.example server/.env           # local config (DB + JWT secret)
 npm --workspace server run prisma:migrate    # create the SQLite database
 npm --workspace server run seed              # create the admin + load seed schematics
-npm test                                     # run the test suites
+npm test                                     # run the unit/component suites
 npm run dev                                  # run server + web in dev
+npm run test:e2e                             # run the Playwright end-to-end suite
 ```
+
+The e2e suite spins up its own seeded database and servers and drives a real browser
+(it uses your system Google Chrome via Playwright's `chrome` channel, so no browser
+download is required).
 
 The seed creates an admin account (default `admin@rail.test` / `admin12345`, override with
 `ADMIN_EMAIL` / `ADMIN_PASSWORD`) and loads any schematic JSON files in `server/seed/`.
@@ -59,4 +64,4 @@ Built in phases (TDD; each phase ends green-tested):
 - [x] **Phase 4** — vector schematic renderer (blank diagram + label/filter modes)
 - [x] **Phase 5** — Game 1 (Pin Drop) + proximity scoring + attempt tracking
 - [x] **Phase 6** — Games 2–4 (Name It, Flashcard SRS, Run the Line) + XP/levels/streaks/mastery/leaderboard
-- [ ] Phase 7 — polish, stats dashboards, daily challenge, e2e
+- [x] **Phase 7** — stats dashboard, daily challenge, navigation, Playwright e2e suite

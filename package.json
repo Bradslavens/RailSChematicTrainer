@@ -9,8 +9,12 @@
   ],
   "scripts": {
     "test": "npm run test --workspaces --if-present",
+    "test:e2e": "node e2e/prepare.mjs && playwright test",
     "dev": "npm run dev --workspace server & npm run dev --workspace web",
     "build": "npm run build --workspaces --if-present"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.1"
   },
   "license": "MIT"
 }
