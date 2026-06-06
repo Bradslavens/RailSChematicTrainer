@@ -1,0 +1,103 @@
+// Rail Schematic Trainer — data model
+// Local-first SQLite; switch `provider` to "postgresql" when hosting.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String     @id @default(cuid())
+  email        String     @unique
+  passwordHash String
+  role         String     @default("learner") // "learner" | "admin"
+  createdAt    DateTime   @default(now())
+
+  attempts     Attempt[]
+  progress     Progress[]
+  stats        UserStats?
+}
+
+model Schematic {
+  id                String   @id @default(cuid())
+  name              String
+  lineColor         String   @default("#1f6feb")
+  originalImagePath String?  // optional labeled reference photo
+  blankImagePath    String?  // optional blank reference photo
+  viewBox           String   // JSON-encoded [minX, minY, width, height]
+  status            String   @default("draft") // "draft" | "published"
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  tracks Track[]
+  points Point[]
+}
+
+model Track {
+  id          String  @id @default(cuid())
+  schematicId String
+  schematic   Schematic @relation(fields: [schematicId], references: [id], onDelete: Cascade)
+  localId     String  // id used inside the source JSON (e.g. "main")
+  name        String?
+  color       String  @default("#1f6feb")
+  polyline    String  // JSON-encoded array of [x, y]
+
+  points Point[]
+}
+
+model Point {
+  id          String   @id @default(cuid())
+  schematicId String
+  schematic   Schematic @relation(fields: [schematicId], references: [id], onDelete: Cascade)
+  trackId     String?
+  track       Track?   @relation(fields: [trackId], references: [id], onDelete: SetNull)
+  type        String   // "signal" | "station" | "crossing" | "milepost" | "ss"
+  label       String
+  x           Float
+  y           Float
+  orderIndex  Int?
+
+  attempts Attempt[]
+  progress Progress[]
+}
+
+model Attempt {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  pointId    String
+  point      Point    @relation(fields: [pointId], references: [id], onDelete: Cascade)
+  gameMode   String   // "pin-drop" | "name-it" | "flashcard" | "run-the-line"
+  correct    Boolean
+  responseMs Int?
+  createdAt  DateTime @default(now())
+}
+
+model Progress {
+  id      String   @id @default(cuid())
+  userId  String
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  pointId String
+  point   Point    @relation(fields: [pointId], references: [id], onDelete: Cascade)
+  srsBox  Int      @default(0)
+  dueAt   DateTime @default(now())
+  streak  Int      @default(0)
+  mastery Float    @default(0)
+
+  @@unique([userId, pointId])
+}
+
+model UserStats {
+  id            String   @id @default(cuid())
+  userId        String   @unique
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  xp            Int      @default(0)
+  level         Int      @default(1)
+  currentStreak Int      @default(0)
+  longestStreak Int      @default(0)
+  lastStudyDay  String?  // YYYY-MM-DD
+}
